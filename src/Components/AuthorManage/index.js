@@ -32,7 +32,8 @@ export default class AuthorManage extends React.Component {
     books: [],
     editDialogOpen: false,
     deleteDialogOpen: false,
-    selectedBook: null
+    selectedBook: null,
+    loaded: false
   };
 
   constructor() {
@@ -51,7 +52,8 @@ export default class AuthorManage extends React.Component {
   async loadData() {
     await AuthorService.getBooks().then(x => {
       return this.setState({
-        books: x.data.data
+        books: x.data.data,
+        loaded: true
       });
     });
   }
@@ -87,6 +89,31 @@ export default class AuthorManage extends React.Component {
     });
   }
 
+  handleTitleChange = ev => {
+    this.setState({
+      selectedBook: {
+        ...this.state.selectedBook,
+        title: ev.target.value
+      }
+    });
+  };
+  handleDescChange = ev => {
+    this.setState({
+      selectedBook: {
+        ...this.state.selectedBook,
+        desc: ev.target.value
+      }
+    });
+  };
+  handleAuthorChange = ev => {
+    this.setState({
+      selectedBook: {
+        ...this.state.selectedBook,
+        author: ev.target.value
+      }
+    });
+  };
+
   render() {
     return (
       <div className="author-dashboard">
@@ -98,24 +125,47 @@ export default class AuthorManage extends React.Component {
           <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              Edytuj książkę
+              <br />"
+              {this.state.selectedBook ? this.state.selectedBook.title : ""}"
             </DialogContentText>
             <TextField
               autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
+              label="Nazwa książki"
               fullWidth
+              value={this.state.selectedBook && this.state.selectedBook.title}
+              onChange={this.handleTitleChange}
+            />
+            <TextField
+              autoFocus
+              label="Autorzy książki"
+              fullWidth
+              value={this.state.selectedBook && this.state.selectedBook.author}
+              onChange={this.handleAuthorChange}
+            />
+            <TextField
+              autoFocus
+              label="Opis książki"
+              fullWidth
+              value={this.state.selectedBook && this.state.selectedBook.desc}
+              onChange={this.handleDescChange}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.hangleClose} color="primary">
-              Cancel
+              Anuluj
             </Button>
-            <Button onClick={this.hangleClose} color="primary">
-              Subscribe
+            <Button
+              onClick={async () => {
+                if (this.state.selectedBook) {
+                  await AuthorService.editBook(this.state.selectedBook);
+                  this.hangleClose();
+                  this.loadData();
+                }
+              }}
+              color="primary"
+            >
+              Edytuj
             </Button>
           </DialogActions>
         </Dialog>
@@ -141,6 +191,7 @@ export default class AuthorManage extends React.Component {
               onClick={async () => {
                 if (this.state.selectedBook) {
                   await AuthorService.deleteBook(this.state.selectedBook._id);
+                  this.hangleClose();
                   this.loadData();
                 }
               }}
@@ -159,48 +210,51 @@ export default class AuthorManage extends React.Component {
                   Udostępnione książki <br />
                   <small>Wszystkie podane poniżej są gotowe do czytania</small>
                 </h1>
-                {this.state.books && this.state.books.length ? (
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Tytuł książki</TableCell>
-                        <TableCell>Author(s)</TableCell>
-                        <TableCell>Opis książki</TableCell>
-                        <TableCell>Edytuj/Usuń</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.state.books.map(x => {
-                        return (
-                          <TableRow key={x._id}>
-                            <TableCell component="th" scope="row">
-                              {x.title}
-                            </TableCell>
-                            <TableCell numeric>{x.author}</TableCell>
-                            <TableCell numeric>{x.desc}</TableCell>
-                            <TableCell>
-                              <Button
-                                color="primary"
-                                onClick={() => this.editBook(x)}
-                              >
-                                <EditIcon />
-                              </Button>
-                              <Button
-                                color="secondary"
-                                onClick={() => this.deleteBook(x)}
-                              >
-                                <DeleteIcon />
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
+                {this.state.loaded ? (
+                  this.state.books && this.state.books.length ? (
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Tytuł książki</TableCell>
+                          <TableCell>Author(s)</TableCell>
+                          <TableCell>Opis książki</TableCell>
+                          <TableCell>Edytuj/Usuń</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.books.map(x => {
+                          return (
+                            <TableRow key={x._id}>
+                              <TableCell component="th" scope="row">
+                                {x.title}
+                              </TableCell>
+                              <TableCell numeric>{x.author}</TableCell>
+                              <TableCell numeric>{x.desc}</TableCell>
+                              <TableCell>
+                                <Button
+                                  color="primary"
+                                  onClick={() => this.editBook(x)}
+                                >
+                                  <EditIcon />
+                                </Button>
+                                <Button
+                                  color="secondary"
+                                  onClick={() => this.deleteBook(x)}
+                                >
+                                  <DeleteIcon />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  ) : (
+                    <p> Nie udostępniasz jeszcze żadnych książek</p>
+                  )
                 ) : (
-                  <p> Nie udostępniasz jeszcze żadnych książek</p>
+                  "..."
                 )}
-
                 <br />
                 <br />
                 <br />
