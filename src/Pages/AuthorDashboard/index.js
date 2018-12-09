@@ -8,7 +8,95 @@ import Grid from "@material-ui/core/Grid";
 import "./index.scss";
 
 class AuthorDashboard extends React.Component {
-  state = {};
+  state = {
+    summaryChart: [0, 1, 2, 3, 4, 5, 6, 7],
+    howManyReadersChart: [
+      {
+        id: "M",
+        title: "mężczyźni",
+        value: 52
+      },
+      {
+        id: "F",
+        title: "kobiety",
+        value: 41
+      }
+    ],
+    readersAgeChart: [
+      {
+        title: "0-18",
+        value: 10
+      },
+      {
+        title: "19-25",
+        value: 25
+      },
+      {
+        title: "26-40",
+        value: 32
+      },
+      {
+        title: "41-60",
+        value: 20
+      },
+      {
+        title: "60+",
+        value: 15
+      }
+    ],
+    howManyRead: [
+      {
+        books: 1,
+        count: 70
+      },
+      {
+        books: 2,
+        count: 55
+      },
+      {
+        books: 3,
+        count: 32
+      },
+      {
+        books: 4,
+        count: 25
+      },
+      {
+        books: 5,
+        count: 10
+      }
+    ],
+    bestReaderInfo: {
+      name: "Konrad Pękala",
+      gender: "M",
+      count: 69,
+      history: [
+        1,
+        0,
+        1,
+        2,
+        1,
+        0,
+        3,
+        4,
+        0,
+        1,
+        7,
+        8,
+        9,
+        4,
+        3,
+        6,
+        5,
+        1,
+        0,
+        0,
+        4,
+        2,
+        3
+      ]
+    }
+  };
 
   render() {
     return (
