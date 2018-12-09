@@ -67,7 +67,7 @@ export default class Ztm extends Component {
         </AppBar>
         <Drawer variant="permanent" className="menu">
           <Divider />
-          <Link to="/Author">
+          <Link to="/Ztm">
             <MenuItem className="big-menu-item">
               <ListItemIcon>
                 <DashboardIcon />
@@ -76,7 +76,7 @@ export default class Ztm extends Component {
             </MenuItem>
           </Link>
           <Divider />
-          <Link to="/Author/Manage">
+          <Link to="/">
             <MenuItem className="big-menu-item">
               <ListItemIcon>
                 <BooksIcon />
