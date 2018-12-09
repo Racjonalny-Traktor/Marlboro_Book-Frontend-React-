@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { NotFound, Author, Ztm, Login } from "./Pages/";
-import "./App.scss";
+// import {  } from "../../Components";
+import "./index.scss";
 
 import classnames from "classnames";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,18 +17,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-class App extends Component {
+export default class Login extends Component {
   render() {
-    return (
-      <Router>
-        <Switch>
-          <Route path="/Author" component={Author} />
-          <Route path="/Ztm" component={Ztm} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Router>
-    );
+    return <div>Please login:</div>;
   }
 }
-
-export default App;

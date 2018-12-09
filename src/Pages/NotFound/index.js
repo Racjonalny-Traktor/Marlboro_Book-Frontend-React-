@@ -13,7 +13,7 @@ class NotFound extends React.Component {
         <Paper>
           <h1>Page not found</h1>
           <Divider />
-          <Link to="/">Home</Link>
+          <Link to={this.props.basePath || "/"}>Home</Link>
         </Paper>
       </div>
     );
