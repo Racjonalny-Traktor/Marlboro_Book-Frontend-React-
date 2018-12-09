@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { NotFound, Dashboard } from "./Pages/";
+import { NotFound, AuthorDashboard } from "./Pages/";
 import "./App.scss";
 
 import classnames from "classnames";
@@ -29,11 +29,6 @@ class App extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-
-  logout() {
-    window.localStorage.removeItem("user_token");
-    window.location.reload();
-  }
 
   render() {
     return (
@@ -66,7 +61,7 @@ class App extends Component {
         <Router>
           <section className="content">
             <Switch>
-              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/Author" component={AuthorDashboard} />
               <Route path="*" component={NotFound} />
             </Switch>
           </section>

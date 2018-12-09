@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import "./index.scss";
 
-class Dashboard extends React.Component {
+class NotFound extends React.Component {
   state = {};
 
   render() {
@@ -20,4 +20,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default NotFound;

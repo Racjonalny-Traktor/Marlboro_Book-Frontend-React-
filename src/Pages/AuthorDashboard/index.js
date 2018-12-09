@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 
 import "./index.scss";
 
-class Dashboard extends React.Component {
+class AuthorDashboard extends React.Component {
   state = {};
 
   render() {
@@ -31,4 +31,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default AuthorDashboard;
