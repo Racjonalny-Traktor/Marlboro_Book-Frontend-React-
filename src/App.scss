@@ -26,6 +26,10 @@ $transition: 0.25s ease;
     // transition: margin-left $transition;
   }
 
+  .bar {
+    background-color: #ff5c5c !important;
+  }
+
   .content {
     padding-left: 1rem;
     padding-right: 1rem;

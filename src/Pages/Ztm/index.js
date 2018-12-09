@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AdminDashboard } from "../../Components";
+import { ZtmDashboard } from "../../Components";
 import "./index.scss";
 
 import classnames from "classnames";
@@ -61,8 +61,8 @@ export default class Ztm extends Component {
         <Router>
           <section className="content">
             <Switch>
-              <Route exact path="/Ztm" component={AdminDashboard} />
-              <Route path="/Ztm/*" component={AdminDashboard} />
+              <Route exact path="/Ztm" component={ZtmDashboard} />
+              <Route path="/Ztm/*" component={ZtmDashboard} />
             </Switch>
           </section>
         </Router>
