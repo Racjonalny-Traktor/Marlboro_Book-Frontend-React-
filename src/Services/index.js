@@ -1,1 +1,1 @@
-export { default as BookService } from ".";
+export { default as AuthorService } from "./AuthorService";
