@@ -1,5 +1,5 @@
 export default class environment {
   static config = {
-    apiUrl: "http://4ea84dff.ngrok.io"
+    apiUrl: "https://e36548e1.ngrok.io"
   };
 }

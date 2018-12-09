@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Form } from "react";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -17,6 +17,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { AuthorService } from "../../Services";
 import "./index.scss";
 import environment from "../../environment/environment";
+import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Close";
 
@@ -33,13 +34,9 @@ export default class AuthorManage extends React.Component {
     editDialogOpen: false,
     deleteDialogOpen: false,
     selectedBook: null,
-    loaded: false
+    loaded: false,
+    addDialogOpen: false
   };
-
-  constructor() {
-    super();
-    this.submitBook = this.submitBook.bind(this);
-  }
 
   /**
    __v: 0
@@ -58,13 +55,21 @@ export default class AuthorManage extends React.Component {
     });
   }
 
-  submitBook(event) {
-    event.preventDefault();
-    // const input = document.getElementById('bookFileName');
-    // const data = event.target.value;
-    console.log(event);
-  }
+  handleSubmit = ev => {
+    ev.preventDefault();
 
+    console.log(ev.target);
+
+    //   // let data = new FormData();
+    //   // data.append('action', `${environment.config.apiUrl}/actions/book`);
+    //   // data.append('param',0);
+    //   // data.append('secondParam',0);
+    //   // data.append('file', new Blob([payload],{type:'text/pdf'}))
+    //   const data =
+    //   let request = new XMLHttpRequest();
+    //   request.open('POST',`${environment.config.apiUrl}/actions/book`);
+    //   request.send(data);
+  };
   componentWillMount() {
     this.loadData();
   }
@@ -75,9 +80,16 @@ export default class AuthorManage extends React.Component {
       selectedBook: x
     });
   }
-  hangleClose = () => {
+  addBook() {
+    this.setState({
+      addDialogOpen: true,
+      selectedBook: {}
+    });
+  }
+  handleClose = () => {
     this.setState({
       editDialogOpen: false,
+      addDialogOpen: false,
       deleteDialogOpen: false
     });
   };
@@ -119,7 +131,7 @@ export default class AuthorManage extends React.Component {
       <div className="author-dashboard">
         <Dialog
           open={this.state.editDialogOpen}
-          onClose={this.hangleClose}
+          onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
@@ -152,14 +164,14 @@ export default class AuthorManage extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.hangleClose} color="primary">
+            <Button onClick={this.handleClose} color="primary">
               Anuluj
             </Button>
             <Button
               onClick={async () => {
                 if (this.state.selectedBook) {
                   await AuthorService.editBook(this.state.selectedBook);
-                  this.hangleClose();
+                  this.handleClose();
                   this.loadData();
                 }
               }}
@@ -172,7 +184,7 @@ export default class AuthorManage extends React.Component {
 
         <Dialog
           open={this.state.deleteDialogOpen}
-          onClose={this.hangleClose}
+          onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Usuń książkę</DialogTitle>
@@ -184,14 +196,14 @@ export default class AuthorManage extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.hangleClose} color="primary">
+            <Button onClick={this.handleClose} color="primary">
               Anuluj
             </Button>
             <Button
               onClick={async () => {
                 if (this.state.selectedBook) {
                   await AuthorService.deleteBook(this.state.selectedBook._id);
-                  this.hangleClose();
+                  this.handleClose();
                   this.loadData();
                 }
               }}
@@ -202,6 +214,43 @@ export default class AuthorManage extends React.Component {
           </DialogActions>
         </Dialog>
 
+        <Dialog
+          open={this.state.addDialogOpen}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Dodaj książkę</DialogTitle>
+          <DialogContent>
+            <form
+              action={`${environment.config.apiUrl}/actions/book`}
+              method="post"
+              encType="multipart/form-data"
+              onSubmit={event => {
+                event.preventDefault();
+                const data = new FormData(event.target);
+                AuthorService.addBook(data);
+              }}
+            >
+              <label>Tytul ksiazki</label>
+              <input name="title" className="myinput textinput" />
+
+              <label>Autor/Autorzy ksiazki</label>
+              <input name="author" className="myinput textinput" />
+              <label>Opis ksiazki</label>
+              <input name="desc" className="myinput textinput" />
+              <label>Plik ksiazki</label>
+              <input
+                type="file"
+                name="bookFile"
+                className="myinput fileinput "
+              />
+              <button submit="true" className="myinput submit">
+                Zatwierdź
+              </button>
+            </form>
+          </DialogContent>
+        </Dialog>
+
         <main>
           <Grid container spacing={24}>
             <Grid item xs={12} md={12}>
@@ -210,6 +259,17 @@ export default class AuthorManage extends React.Component {
                   Udostępnione książki <br />
                   <small>Wszystkie podane poniżej są gotowe do czytania</small>
                 </h1>
+                <Button
+                  color="secondary"
+                  variant="raised"
+                  onClick={() => this.addBook()}
+                  style={{
+                    float: "right"
+                  }}
+                >
+                  <AddIcon />
+                  Dodaj nową książkę
+                </Button>
                 {this.state.loaded ? (
                   this.state.books && this.state.books.length ? (
                     <Table>
@@ -253,25 +313,8 @@ export default class AuthorManage extends React.Component {
                     <p> Nie udostępniasz jeszcze żadnych książek</p>
                   )
                 ) : (
-                  "..."
+                  <p>Ładowanie danych</p>
                 )}
-                <br />
-                <br />
-                <br />
-                <br />
-                <div>
-                  <form
-                    action={`${environment.config.apiUrl}/actions/book`}
-                    method="post"
-                    encType="multipart/form-data"
-                  >
-                    <input name="title" />
-                    <input name="desc" />
-                    <input name="author" />
-                    <input type="file" name="bookFile" />
-                    <button submit="true">Zatwierdź</button>
-                  </form>
-                </div>
               </Paper>
             </Grid>
           </Grid>

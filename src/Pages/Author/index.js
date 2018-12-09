@@ -95,22 +95,6 @@ class Author extends Component {
               <ListItemText inset primary="Dodaj" />
             </MenuItem>
           </Link>
-          <Link to="/Author/Manage?action=delete">
-            <MenuItem>
-              <ListItemIcon>
-                <DeleteIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Usun" />
-            </MenuItem>
-          </Link>{" "}
-          <Link to="/Author/Manage?action=edit">
-            <MenuItem>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Edytuj" />
-            </MenuItem>
-          </Link>
           <Divider />
           <Link to="/Author/Info">
             <MenuItem className="big-menu-item">

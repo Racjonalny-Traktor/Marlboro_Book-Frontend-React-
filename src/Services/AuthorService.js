@@ -9,6 +9,16 @@ export default class AuthorService {
       console.error(error);
     }
   }
+  static async addBook(data) {
+    try {
+      return await fetch(`${environment.config.apiUrl}/actions/book`, {
+        method: "POST",
+        body: data
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async deleteBook(id) {
     try {
       return await axios.delete(`${environment.config.apiUrl}/actions/book`, {
