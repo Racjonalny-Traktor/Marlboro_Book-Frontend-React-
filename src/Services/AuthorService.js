@@ -9,17 +9,6 @@ export default class AuthorService {
       console.error(error);
     }
   }
-  import axios from "axios";
-import environment from "../environment/environment";
-
-export default class AuthorService {
-  static async getBooks() {
-    try {
-      return await axios.get(`${environment.config.apiUrl}/actions/book`);
-    } catch (error) {
-      console.error(error);
-    }
-  }
   static async addBook(data) {
     try {
       return await fetch(`${environment.config.apiUrl}/actions/book`, {
