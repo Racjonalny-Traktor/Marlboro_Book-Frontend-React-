@@ -12,17 +12,37 @@ class AuthorDashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="author-dashboard">
         <main>
           <Grid container spacing={24}>
-            <Grid item md={6}>
+            <Grid item xs={12} md={12}>
+              <h1>
+                Ostatnie statystyki <br />
+                <small>Zebrane na podstawie ostatnich dwóch tygodni</small>
+              </h1>
+              <Paper>asdasd</Paper>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <h1>
+                Ile osób przeczytało <br />
+                <small>Zainteresowanie wsród płci</small>
+              </h1>
+              <Paper>asd</Paper>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <h1>
+                Ile przeczytano <br />
+                <small>Ile osób przeczytało ... książek</small>
+              </h1>
               <Paper />
             </Grid>
-            <Grid item md={6}>
-              <Paper />
-            </Grid>
-            <Grid item md={12}>
-              <Paper />
+            <Grid item xs={12} md={12}>
+              <h1>
+                Najlepszy czytelnik <br />
+                <small>Twoim największym fanem jest...</small>
+              </h1>
+              <Paper>asd</Paper>
             </Grid>
           </Grid>
         </main>
