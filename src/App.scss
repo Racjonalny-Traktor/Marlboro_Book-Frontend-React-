@@ -28,6 +28,7 @@ $transition: 0.25s ease;
 
   .bar {
     background-color: #ff5c5c !important;
+    border-bottom: 3px solid darken(#ff5c5c, 20%);
   }
 
   .content {
