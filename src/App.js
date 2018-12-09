@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { NotFound, Author, Ztm, Login } from "./Pages/";
 import "./App.scss";
 
@@ -20,13 +20,13 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 class App extends Component {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <Switch>
           <Route path="/Author" component={Author} />
           <Route path="/Ztm" component={Ztm} />
           <Route path="*" component={NotFound} />
         </Switch>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { AuthorDashboard } from "../../Components";
+import { AuthorDashboard, AuthorManage, AuthorInfo } from "../../Components";
 import "./index.scss";
 
 import classnames from "classnames";
@@ -121,14 +121,14 @@ class Author extends Component {
             </MenuItem>
           </Link>
         </Drawer>
-        <Router>
-          <section className="content">
-            <Switch>
-              <Route path="/Author" component={AuthorDashboard} />
-              <Route path="/Author/*" component={AuthorDashboard} />
-            </Switch>
-          </section>
-        </Router>
+        <section className="content">
+          <Switch>
+            <Route exact path="/Author" component={AuthorDashboard} />
+            <Route path="/Author/Manage" component={AuthorManage} />
+            <Route path="/Author/Info" component={AuthorInfo} />
+            <Route path="/Author/*" component={AuthorDashboard} />
+          </Switch>
+        </section>
       </div>
     );
   }

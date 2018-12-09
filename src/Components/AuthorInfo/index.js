@@ -11,7 +11,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 import "./index.scss";
 
-export default class AuthorManage extends React.Component {
+export default class AuthorInfo extends React.Component {
   state = {};
   render() {
     return (
