@@ -196,13 +196,7 @@ export default class AuthorManage extends React.Component {
               action={`${environment.config.apiUrl}/actions/book`}
               method="post"
               encType="multipart/form-data"
-              onSubmit={event => {
-                event.preventDefault();
-                const data = new FormData(event.target);
-                AuthorService.addBook(data);
-                this.loadData();
-                this.handleClose();
-              }}
+              target="my_frame"
             >
               <label>Tytul ksiazki</label>
               <input name="title" className="myinput textinput" />
@@ -212,12 +206,22 @@ export default class AuthorManage extends React.Component {
               <label>Opis ksiazki</label>
               <input name="desc" className="myinput textinput" />
               <label>Plik ksiazki</label>
+              <iframe name="my_frame" title="my_frame" hidden />
               <input
                 type="file"
                 name="bookFile"
                 className="myinput fileinput "
               />
-              <button submit="true" className="myinput submit">
+              <button
+                submit="true"
+                className="myinput submit"
+                onMouseUp={() => {
+                  setTimeout(() => {
+                    this.loadData();
+                    this.handleClose();
+                  }, 500);
+                }}
+              >
                 Zatwierdź
               </button>
             </form>

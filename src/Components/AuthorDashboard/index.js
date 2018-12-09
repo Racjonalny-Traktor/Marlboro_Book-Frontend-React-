@@ -53,12 +53,28 @@ class TriangleBar extends React.Component {
 class AuthorDashboard extends React.Component {
   state = {};
 
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
   async loadData() {
-    await AuthorService.getReaderData().then(x => {
-      console.log(x);
-      return this.setState({
+    await AuthorService.getReaderData().then(x =>
+      this.setState({
         ...x.data.data,
-        loaded: true
+        loaded: true,
+        booksPopularity: []
+      })
+    );
+    await AuthorService.getBooks().then(x => {
+      console.log(x.data);
+      this.setState({
+        booksPopularity: x.data.data.map(y => {
+          return {
+            title: y.title,
+            M: this.getRandomInt(15) + 15,
+            F: this.getRandomInt(13) + 15
+          };
+        })
       });
     });
   }
@@ -114,15 +130,22 @@ class AuthorDashboard extends React.Component {
                     <small>Twoim największym fanem jest...</small>
                   </h1>
                   <ResponsiveContainer height={200}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={
-                        this.state.bestReaderInfo
-                          ? this.state.bestReaderInfo.image
-                          : ""
-                      }
-                      style={{ width: 100, height: 100 }}
-                    />
+                    <div>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={
+                          this.state.bestReaderInfo
+                            ? this.state.bestReaderInfo.image
+                            : ""
+                        }
+                        style={{ width: 100, height: 100 }}
+                      />
+                      <h3>
+                        {this.state.bestReaderInfo
+                          ? this.state.bestReaderInfo.name
+                          : ""}
+                      </h3>
+                    </div>
                   </ResponsiveContainer>
                 </Paper>
               </Grid>
