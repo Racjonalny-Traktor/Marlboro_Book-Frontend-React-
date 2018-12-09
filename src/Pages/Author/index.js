@@ -87,14 +87,6 @@ class Author extends Component {
               <ListItemText inset primary="Zarządzaj zawartością" />
             </MenuItem>
           </Link>
-          <Link to="/Author/Manage?action=add">
-            <MenuItem>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Dodaj" />
-            </MenuItem>
-          </Link>
           <Divider />
           <Link to="/Author/Info">
             <MenuItem className="big-menu-item">
