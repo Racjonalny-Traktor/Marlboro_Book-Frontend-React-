@@ -76,7 +76,7 @@ export default class Ztm extends Component {
             </MenuItem>
           </Link>
           <Divider />
-          <Link to="/">
+          <Link to="/Ztm">
             <MenuItem className="big-menu-item">
               <ListItemIcon>
                 <BooksIcon />
