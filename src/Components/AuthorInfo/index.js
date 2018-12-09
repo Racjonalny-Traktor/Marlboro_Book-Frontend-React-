@@ -18,12 +18,15 @@ export default class AuthorInfo extends React.Component {
       <div className="author-dashboard">
         <main>
           <Grid container spacing={24}>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={12}>
               <Paper className="paper">
                 <h1>
-                  Ostatnie statystyki <br />
-                  <small>Popularność na przestrzeni ostatnich dni</small>
+                  Aktywność <br />
+                  <small>
+                    Wszystkie informacje dotyczące twojej aktywności
+                  </small>
                 </h1>
+                ... todo
               </Paper>
             </Grid>
           </Grid>

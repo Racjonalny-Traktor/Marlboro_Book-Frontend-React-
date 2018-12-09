@@ -229,6 +229,8 @@ export default class AuthorManage extends React.Component {
                 event.preventDefault();
                 const data = new FormData(event.target);
                 AuthorService.addBook(data);
+                this.loadData();
+                this.handleClose();
               }}
             >
               <label>Tytul ksiazki</label>
