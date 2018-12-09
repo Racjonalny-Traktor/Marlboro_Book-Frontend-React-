@@ -9,6 +9,13 @@ export default class AuthorService {
       console.error(error);
     }
   }
+  static async getReaderData() {
+    try {
+      return await axios.get(`${environment.config.apiUrl}/author/data`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async addBook(data) {
     try {
       return await fetch(`${environment.config.apiUrl}/actions/book`, {
