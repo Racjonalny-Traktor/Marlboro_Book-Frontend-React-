@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { ZtmService } from "../../Services";
 
 import {
   Radar,
@@ -43,6 +44,20 @@ export default class ZtmDashboard extends React.Component {
     buses: []
   };
 
+  async loadData() {
+    await ZtmService.getBuses().then(x => {
+      return this.setState({
+        buses: x.data.data,
+        loaded: true
+      });
+    });
+    console.log(this.state.buses);
+  }
+
+  componentWillMount() {
+    this.loadData();
+  }
+
   render() {
     const colors = [
       "#1f77b4",
@@ -65,23 +80,23 @@ export default class ZtmDashboard extends React.Component {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Autobus</TableCell>
-                      <TableCell>Przeczytano</TableCell>
-                      <TableCell>Użytkownikow</TableCell>
+                      <TableCell>Nr Autobusu</TableCell>
+                      <TableCell>Nazwa urządzenia</TableCell>
+                      <TableCell>Przeczytano dzisiaj</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {this.state.buses.map(x => {
+                    {this.state.buses.map(x => {
                       return (
                         <TableRow key={x._id}>
                           <TableCell component="th" scope="row">
-                            {x.title}
+                            {x.line}
                           </TableCell>
-                          <TableCell numeric>{x.author}</TableCell>
-                          <TableCell numeric>{x.desc}</TableCell>
+                          <TableCell numeric>{x.beaconsTagName}</TableCell>
+                          <TableCell numeric>{x.readingUsersToday}</TableCell>
                         </TableRow>
                       );
-                    })} */}
+                    })}
                   </TableBody>
                 </Table>
               </Paper>

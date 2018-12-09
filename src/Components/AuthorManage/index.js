@@ -38,14 +38,6 @@ export default class AuthorManage extends React.Component {
     addDialogOpen: false
   };
 
-  /**
-   __v: 0
-    _id: "5c0c6c9695ed031044c6555a"
-    author: "author xx"
-    desc: "test xxx"
-    print: "false"
-    title: "test"
-   */
   async loadData() {
     await AuthorService.getBooks().then(x => {
       return this.setState({
@@ -55,21 +47,6 @@ export default class AuthorManage extends React.Component {
     });
   }
 
-  handleSubmit = ev => {
-    ev.preventDefault();
-
-    console.log(ev.target);
-
-    //   // let data = new FormData();
-    //   // data.append('action', `${environment.config.apiUrl}/actions/book`);
-    //   // data.append('param',0);
-    //   // data.append('secondParam',0);
-    //   // data.append('file', new Blob([payload],{type:'text/pdf'}))
-    //   const data =
-    //   let request = new XMLHttpRequest();
-    //   request.open('POST',`${environment.config.apiUrl}/actions/book`);
-    //   request.send(data);
-  };
   componentWillMount() {
     this.loadData();
   }

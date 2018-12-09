@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { ZtmDashboard } from "../../Components";
 import "./index.scss";
 
@@ -16,6 +16,18 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import MenuList from "@material-ui/core/MenuList";
+import MenuItem from "@material-ui/core/MenuItem";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import InfoIcon from "@material-ui/icons/Info";
+import DraftsIcon from "@material-ui/icons/Drafts";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Clear";
+import EditIcon from "@material-ui/icons/Create";
+import BooksIcon from "@material-ui/icons/LibraryBooks";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 export default class Ztm extends Component {
   state = {
@@ -53,10 +65,25 @@ export default class Ztm extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" className={classnames("menu")}>
-          <IconButton onClick={this.handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
+        <Drawer variant="permanent" className="menu">
+          <Divider />
+          <Link to="/Author">
+            <MenuItem className="big-menu-item">
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="Dashboard" />
+            </MenuItem>
+          </Link>
+          <Divider />
+          <Link to="/Author/Manage">
+            <MenuItem className="big-menu-item">
+              <ListItemIcon>
+                <BooksIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="Pobierz dane" />
+            </MenuItem>
+          </Link>
         </Drawer>
         <Router>
           <section className="content">

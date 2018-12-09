@@ -37,6 +37,16 @@ $transition: 0.25s ease;
     margin-top: $offsetY;
   }
 
+  .big-menu-item {
+    span {
+      font-size: 1.2rem;
+      margin-left: -0.5rem;
+    }
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   //when opened
   &--open {
     .menu>div {
